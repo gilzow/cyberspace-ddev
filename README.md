@@ -1,40 +1,26 @@
-<p align="center"><img src="https://statamic.com/assets/branding/Statamic-Logo+Wordmark-Rad.svg" width="400" alt="Statamic Logo" /></p>
-
-## About Statamic
-
-Statamic is the flat-first, Laravel + Git powered CMS designed for building beautiful, easy to manage websites.
-
-> **Note:** This repository contains the code for the Statamic application. To contribute to the core package, visit the [Statamic core package repository][cms-repo].
-
-
-## Learning Statamic
-
-Statamic has extensive [documentation][docs]. We dedicate a significant amount of time and energy every day to improving them, so if something is unclear, feel free to open issues for anything you find confusing or incomplete. We are happy to consider anything you feel will make the docs and CMS better.
-
-## Support
-
-We provide official developer support on [Statamic Pro](https://statamic.com/pricing) projects. Community-driven support is available on the [forum](https://statamic.com/forum) and in [Discord][discord].
-
-
-## Contributing
-
-Thank you for considering contributing to Statamic! We simply ask that you review the [contribution guide][contribution] before you open issues or send pull requests.
-
-
-## Code of Conduct
-
-In order to ensure that the Statamic community is welcoming to all and generally a rad place to belong, please review and abide by the [Code of Conduct](https://github.com/statamic/cms/wiki/Code-of-Conduct).
-
-
-## Important Links
-
-- [Statamic Main Site](https://statamic.com)
-- [Statamic Documentation][docs]
-- [Statamic Core Package Repo][cms-repo]
-- [Statamic Migrator](https://github.com/statamic/migrator)
-- [Statamic Discord][discord]
-
-[docs]: https://statamic.dev/
-[discord]: https://statamic.com/discord
-[contribution]: https://github.com/statamic/cms/blob/master/CONTRIBUTING.md
-[cms-repo]: https://github.com/statamic/cms
+## Steps
+1. run `composer create-project --prefer-dist statamic/statamic cyberspace-place-ddev`
+2. cd into `cyberspace-place-ddev`
+3. run `git init`
+4. run `git branch -m main`
+5. copy ify.sh into directory
+6. run `./ify.sh`
+7. run `./utils/ify/platformify`
+8. Answer questions, select MariaDB
+9. Incorrect [`./.platform/services.yaml`](./.platform/services.yaml) file is created
+10. Run ` git add .platform/routes.yaml .platform/services.yaml .platform.app.yaml`
+12. git commit & git push
+13. Run `platform project:create`
+14. Answer questions
+15. run `ddev config`
+13. Accept all defaults
+14. run `ddev get ddev/ddev-platformsh`
+15. Answer questions
+16. run `ddev start`
+17. Site fails to start
+18. run `ddev ssh`
+19. run `printenv | grep PLATFORM` and notice `PLATFORM_RELATIONSHIPS=ewogfQo=`
+20. Look at `./.platform/services.yaml` and notice it is malformed <-- git commits stop here
+21. Correct `./.platform/services.yaml` by adding service name
+21. Run `ddev stop`
+22. Rerun `ddev get ddev/ddev-platformsh`
