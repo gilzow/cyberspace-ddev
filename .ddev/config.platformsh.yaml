@@ -1,0 +1,59 @@
+# #ddev-generated
+# Generated configuration based on platform.sh project configuration
+disable_settings_management: true
+
+php_version: 8.2
+database:
+  type: mariadb
+  version: 10.4
+docroot: public
+webimage_extra_packages:
+- figlet
+
+
+
+
+
+
+web_environment:
+- "PLATFORM_RELATIONSHIPS=ewogfQo="
+- "PLATFORM_APP_DIR=/var/www/html"
+- "PLATFORM_PROJECT_ENTROPY=e2d845eebeb1af1cd8358dbab3377416708ab59988bda613e0120693fd03322c"
+# Consider commit hash for PLATFORM_TREE_ID
+- "PLATFORM_TREE_ID=2dc356f2fea13ef683f9adc5fc5bd28e05ad992a"
+- "PLATFORM_CACHE_DIR=/mnt/ddev-global-cache/ddev-platformsh/cyberspace-place-ddev"
+- "PLATFORM_ROUTES=eyAiaHR0cHM6Ly9jeWJlcnNwYWNlLXBsYWNlLWRkZXYuZGRldi5zaXRlLyI6IHsgInByaW1hcnkiOiB0cnVlLCAiaWQiOiBudWxsLCAicHJvZHVjdGlvbl91cmwiOiAiaHR0cHM6Ly9jeWJlcnNwYWNlLXBsYWNlLWRkZXYuZGRldi5zaXRlLyIsICJhdHRyaWJ1dGVzIjoge30sICJ1cHN0cmVhbSI6ICJkcnVwYWwiLCAidHlwZSI6ICJ1cHN0cmVhbSIsICJvcmlnaW5hbF91cmwiOiAiaHR0cHM6Ly97ZGVmYXVsdH0vIiB9IH0="
+- "PLATFORM_VARIABLES=e30="
+
+
+
+hooks:
+  post-start:
+  - exec: platform self:update -qy --no-major || true
+  - exec: mkdir -p ${PLATFORM_CACHE_DIR} || true
+  - exec: '[ ! -z "${PLATFORMSH_CLI_TOKEN:-}" ] && (platform ssh-cert:load  -y || true)'
+
+
+
+  # platformsh build hooks
+
+  - exec: |
+      set -eux
+      composer --no-ansi --no-interaction install --no-progress --prefer-dist --optimize-autoloader --no-dev
+      
+
+
+
+  # platformsh deploy hooks
+
+  - exec: |
+      set -eux
+      php artisan optimize:clear
+      php artisan migrate --force
+      
+
+
+
+
+
+
